@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trishanku | Polar Expedition Asset System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="auth-screen" id="authScreen">
+    <div class="auth-card">
+      <div class="brand auth-brand">
+        <div class="brand-mark">T</div>
+        <div>
+          <h1>Trishanku</h1>
+          <span>The Polar Intelligence</span>
+        </div>
+      </div>
+      <p class="auth-eyebrow">MOES / ANTARCTIC OPERATIONS</p>
+      <h2 class="auth-title">Sign in to continue</h2>
+      <p class="auth-subtitle">Access the polar expedition asset system.</p>
+
+      <form id="loginForm" class="auth-form">
+        <label>Username
+          <input id="loginUsername" type="text" placeholder="e.g. souvik" autocomplete="username" required />
+        </label>
+        <label>Password
+          <input id="loginPassword" type="password" placeholder="Enter password" autocomplete="current-password" required minlength="4" />
+        </label>
+        <p class="auth-error hidden" id="authError">Please enter a username and a password (min. 4 characters).</p>
+        <button class="primary-btn auth-submit" type="submit">Sign in →</button>
+      </form>
+      <small class="auth-note">Demo environment — any username / password (4+ characters) will work.</small>
+    </div>
+  </div>
+
+  <div class="app-shell hidden" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">T</div>
+        <div>
+          <h1>Trishanku</h1>
+          <span>The Polar Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-section="dashboard">⌂ <span>Dashboard</span></button>
+        <button class="nav-item" data-section="inventory">▦ <span>Inventory</span></button>
+        <button class="nav-item" data-section="forecast">◈ <span>AI Forecast</span></button>
+        <button class="nav-item" data-section="logistics">⌖ <span>Logistics Map</span></button>
+<button class="nav-item" data-section="shipments">🚢 <span>Shipments</span></button>
+        <button class="nav-item" data-section="alerts">⚠ <span>Alerts</span></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status"><span></span> System operational</div>
+        <small>Made by Lunar Alchemist</small>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div>
+          <p class="eyebrow">MOES / ANTARCTIC OPERATIONS</p>
+          <h2 id="pageTitle">Mission Dashboard</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="alertButton" title="View alerts">🔔<span class="notification-dot"></span></button>
+          <div class="avatar" id="userAvatar">TD</div>
+          <button class="icon-btn" id="logoutBtn" title="Sign out">⏻</button>
+        </div>
+      </header>
+
+      <section class="page-section active-section" id="dashboard">
+        <div class="welcome-row">
+          <div>
+            <h3 id="greetingHeading">Good morning, <span id="greetingName">Explorer</span></h3>
+            <p>Monitor supplies, predict shortages, and coordinate polar logistics.</p>
+          </div>
+          <button class="primary-btn" id="refreshBtn">↻ Refresh data</button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon blue">▦</div>
+            <div><span>Total inventory</span><strong id="totalItems">1,248</strong><small>Tracked units</small></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon cyan">⛽</div>
+            <div><span>Fuel remaining</span><strong>42 days</strong><small class="positive">+4 days vs last week</small></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon orange">⚠</div>
+            <div><span>Low stock alerts</span><strong id="lowStockCount">3</strong><small>Requires attention</small></div>
+          </article>
+          <article class="stat-card clickable-card" data-go="shipments" tabindex="0" role="button">
+            <div class="stat-icon purple">⌖</div>
+            <div><span>Active shipments</span><strong>03</strong><small>Across polar routes</small></div>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel chart-panel">
+            <div class="panel-heading">
+              <div><h3>Supply consumption</h3><p>Illustrative fuel stock projection</p></div>
+              <span class="tag">AI MODEL</span>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="consumptionChart" width="700" height="290"></canvas>
+            </div>
+            <div class="chart-footer"><span>Day 1</span><span>Day 15</span><span>Day 30</span></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading"><div><h3>Station status</h3><p>Current operational overview</p></div></div>
+            <div class="station-card"><div class="station-title"><span class="station-dot"></span><strong>Bharati Station</strong><span class="status-pill success">Stable</span></div><p>Inventory health</p><div class="progress"><span style="width: 82%"></span></div><small>82% available capacity</small></div>
+            <div class="station-card"><div class="station-title"><span class="station-dot"></span><strong>Maitri Station</strong><span class="status-pill warning">Monitor</span></div><p>Inventory health</p><div class="progress"><span style="width: 61%"></span></div><small>61% available capacity</small></div>
+            <div class="mini-map"><span>⌖</span><span>Antarctic operations zone</span></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="panel-heading"><div><h3>Priority alerts</h3><p>Items requiring operational review</p></div><button class="text-btn" data-go="alerts">View all →</button></div>
+          <div id="dashboardAlerts" class="alert-list"></div>
+        </article>
+      </section>
+
+      <section class="page-section" id="inventory">
+        <div class="section-heading"><div><h3>Inventory management</h3><p>Track essential supplies across research stations.</p></div><button class="primary-btn" id="addItemBtn">+ Add item</button></div>
+        <article class="panel">
+          <div class="table-tools"><input id="searchInput" placeholder="Search items..." /><select id="categoryFilter"><option value="all">All categories</option><option>Fuel</option><option>Food</option><option>Medical</option><option>Equipment</option></select></div>
+          <div class="table-scroll"><table><thead><tr><th>Item</th><th>Category</th><th>Station</th><th>Quantity</th><th>Daily burn</th><th>Status</th></tr></thead><tbody id="inventoryTable"></tbody></table></div>
+        </article>
+      </section>
+
+      <section class="page-section" id="forecast">
+        <div class="section-heading"><div><h3>AI forecasting</h3><p>Estimate depletion timelines using consumption trends.</p></div></div>
+        <div class="forecast-grid">
+          <article class="panel forecast-card"><span class="tag">PREDICTION</span><h4>Diesel fuel</h4><strong>42 days</strong><p>Estimated remaining duration</p><div class="forecast-line"><span style="width: 68%"></span></div><small>Confidence: 87% · Illustrative model output</small></article>
+          <article class="panel forecast-card"><span class="tag">PREDICTION</span><h4>Food supplies</h4><strong>28 days</strong><p>Estimated remaining duration</p><div class="forecast-line"><span style="width: 45%"></span></div><small>Confidence: 81% · Illustrative model output</small></article>
+          <article class="panel forecast-card"><span class="tag">PREDICTION</span><h4>Heating fuel</h4><strong>19 days</strong><p>Estimated remaining duration</p><div class="forecast-line danger"><span style="width: 29%"></span></div><small>Confidence: 79% · Illustrative model output</small></article>
+        </div>
+        <article class="panel"><div class="panel-heading"><div><h3>Forecast workflow</h3><p>Suggested processing pipeline</p></div></div><div class="workflow"><span>Inventory data</span><b>→</b><span>Daily usage</span><b>→</b><span>AI regression</span><b>→</b><span>Days remaining</span></div></article>
+      </section>
+
+      <section class="page-section" id="logistics">
+        <div class="section-heading"><div><h3>Logistics & map</h3><p>Visualize stations and simulated supply movements.</p></div></div>
+        <article class="panel logistics-map">
+          <div class="map-grid"></div><div class="map-label label-1">Maitri <span>●</span></div><div class="map-label label-2">Bharati <span>●</span></div><div class="route route-1"></div><div class="route route-2"></div><div class="ship ship-1">🚢</div><div class="ship ship-2">🚢</div><div class="map-center">ANTARCTICA<br><small>SIMULATED OPERATIONS MAP</small></div>
+        </article>
+        <div class="stats-grid logistics-stats"><article class="stat-card clickable-card" data-shipment="A" tabindex="0" role="button"><div class="stat-icon blue">🚢</div><div><span>Shipment A</span><strong>In transit</strong><small>ETA: 3 days</small></div></article><article class="stat-card clickable-card" data-shipment="B" tabindex="0" role="button"><div class="stat-icon cyan">📦</div><div><span>Shipment B</span><strong>Loading</strong><small>Departure pending</small></div></article><article class="stat-card clickable-card" data-shipment="C" tabindex="0" role="button"><div class="stat-icon purple">⌖</div><div><span>Shipment C</span><strong>Delivered</strong><small>Received at Maitri</small></div></article></div>
+      </section>
+
+
+      <section class="page-section" id="shipments">
+        <div class="section-heading">
+          <div><h3>Shipment control center</h3><p>Monitor simulated cargo movement and update shipment progress.</p></div>
+          <button class="primary-btn" id="newShipmentBtn">+ New shipment</button>
+        </div>
+        <article class="panel">
+          <div class="table-tools">
+            <input id="shipmentSearch" placeholder="Search shipment or destination..." />
+            <select id="shipmentFilter"><option value="all">All statuses</option><option>Loading</option><option>In transit</option><option>Delivered</option><option>Delayed</option></select>
+          </div>
+          <div class="table-scroll"><table><thead><tr><th>ID</th><th>Destination</th><th>Cargo</th><th>Departure</th><th>ETA</th><th>Status</th><th>Action</th></tr></thead><tbody id="shipmentsTable"></tbody></table></div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><div><h3>Shipment activity</h3><p>Recent updates from the logistics simulation.</p></div></div>
+          <div id="shipmentActivity" class="alert-list"></div>
+        </article>
+      </section>
+
+      <section class="page-section" id="alerts">
+        <div class="section-heading"><div><h3>Alerts & notifications</h3><p>Review stock risks and logistics updates.</p></div><button class="secondary-btn" id="clearAlertsBtn">Mark all reviewed</button></div>
+        <article class="panel"><div id="allAlerts" class="alert-list"></div></article>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="itemModal">
+    <div class="modal-card">
+      <button class="close-btn" id="closeModalBtn">×</button>
+      <h3>Add inventory item</h3>
+      <form id="itemForm">
+        <label>Item name<input id="itemName" required placeholder="e.g. Oxygen cylinders" /></label>
+        <label>Category<select id="itemCategory"><option>Fuel</option><option>Food</option><option>Medical</option><option>Equipment</option></select></label>
+        <label>Station<select id="itemStation"><option>Bharati</option><option>Maitri</option></select></label>
+        <label>Quantity<input id="itemQuantity" type="number" min="1" required /></label>
+        <label>Daily burn<input id="itemBurn" type="number" min="0" required /></label>
+        <button class="primary-btn" type="submit">Save item</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <div class="modal hidden" id="shipmentModal">
+    <div class="modal-card">
+      <button class="close-btn" id="closeShipmentModalBtn">×</button>
+      <h3 id="shipmentModalTitle">Shipment details</h3>
+      <div id="shipmentDetails" class="shipment-details"></div>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="advanceShipmentBtn">Advance status</button>
+        <button class="primary-btn" id="closeShipmentDetailsBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
